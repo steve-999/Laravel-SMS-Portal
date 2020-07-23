@@ -1,0 +1,90 @@
+
+body {
+    background-color: lightsteelblue;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+#banner {
+    height: 100px;
+    background-color: steelblue;
+    color: white;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+.message-form-card {
+    width: 400px;
+    background-color: ghostwhite;
+}
+
+#logo {
+    display: inline;
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 40px;
+}
+
+#logo > a {
+    color: white;
+    text-decoration: none;
+}
+
+#logo > a:hover {
+    color: gold;
+}
+
+#navigation {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 500px;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: gold;
+}
+
+th, td {
+    padding: 5px;
+    background-color: ghostwhite;
+}
+
+#phone-number {
+    padding: 1px;
+    background-color: #ffcccc;
+}
+
+#message-body {
+    padding: 1px;
+    background-color: #ffcccc;
+}
+
+#phone-number-error-message {
+    font-size: 12px;
+    color: red;
+}
