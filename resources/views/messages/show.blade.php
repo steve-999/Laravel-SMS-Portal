@@ -1,7 +1,9 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
 @section('content')
-
-    <h2>Message id: {{ $msg_id }}</h2>
-
+<table>
+    @foreach($keys as $key)
+        <tr><td>{{ $key }}</td><td>{{ $message->{$key} }}</td></tr>
+    @endforeach
+</table>
 @endsection

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use Auth;
 use Illuminate\Http\Request;
 use Twilio\Rest\Client;
 
@@ -20,7 +21,7 @@ class SendMessageController extends Controller
     /**
      * Validate destination phone number and message body
      */
-    public function validateMessage(Request $request)
+    public function sendMessage(Request $request)
     {
         error_log(strlen($request['message']));
         $validatedData = $request->validate([
@@ -28,17 +29,8 @@ class SendMessageController extends Controller
             'message' => 'required|max:140',
         ]);
         $dest_number = $validatedData["phone_number"];
-        $this->sendMessage($validatedData["message"], $dest_number);
-        return back()->with(['success' => "Message sent!"]);
-    }
-
-    /**
-     * Sends SMS to user using Twilio's programmable sms client
-     * @param String $message Body of sms
-     * @param Number $dest_number Number of recipient
-     */
-    private function sendMessage($message, $dest_number)
-    {
+        $message = $validatedData["message"];
+    
         $account_sid = getenv("TWILIO_SID");
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
         $twilio_number = getenv("TWILIO_NUMBER");
@@ -46,13 +38,13 @@ class SendMessageController extends Controller
         //$client->messages->create($dest_number, ['from' => $twilio_number, 'body' => $message]);
 
         $msg = new Message();
-        $msg->user_id = 1;
+        $msg->user_id = Auth::user()->id;
         $msg->src_number = $twilio_number;
         $msg->dst_number = $dest_number;
         $msg->body = $message;
-        $msg->status = NULL;
+        $msg->status = 'Queued';
         $msg->save();
-
+        return back()->with(['success' => "Message sent!"]);
     }
 }
 

@@ -19,15 +19,22 @@ $(document).ready(function(){
         }
     });
 
-    $('#message-body').on('keyup keydown', function() {
-        const msg_body_length = (this.value).length;
+    $('#message-body').on('keyup keydown', function(e) {
+        const msg_body_length = e.target.value.length;
         if (msg_body_length > 0 && msg_body_length <= 140) {
             $('#message-body').css('background-color', '#ccffcc');
         }
         else {
             $('#message-body').css('background-color', '#ffcccc');
         }
-        $('#num-chars').html(Math.max(0, 140 - (this.value).length));
+        if (140 - msg_body_length >= 0) {
+            $('#num-chars').html(140 - msg_body_length);
+            $('#num-chars').css('color', 'black');
+        }
+        else {
+            $('#num-chars').html((msg_body_length - 140) + ' too many characters');
+            $('#num-chars').css('color', 'red');
+        }
     });
 
 });

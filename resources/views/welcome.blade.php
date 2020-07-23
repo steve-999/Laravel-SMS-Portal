@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label>Phone Number</label>
                         <input id="phone-number" type="tel" class="form-control" name="phone_number" value="{{ old('phone_number') }}" 
-                            placeholder="Enter phone number">
+                            placeholder="Enter mobile phone number">
                         <div id="phone-number-error-message">&nbsp;</div>
                     </div>                                
                     <div class="form-group">

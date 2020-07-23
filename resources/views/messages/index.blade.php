@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 style="text-align: center; margin-bottom: 30px;">Messages</h2>
+    <h2>Messages</h2>
     @if(count($messages))
-        <div class="container" id="messages-container">
+        <div id="messages-container">
             <table border="1">
                 <tr>
                     <th>&nbsp;</th>
@@ -15,7 +15,11 @@
                     <tr>
                         <td>{{ $loop->index }}</td>
                         @foreach($keys as $key) 
-                            <td>{{ $msg[$key] }}</td>
+                            @if($key == 'msg_id')
+                                <td><a href="/messages/{{ $msg->{$key} }}">{{ $msg->{$key} }}</a></td>
+                            @else
+                                <td>{{ $msg->{$key} }}</td>
+                            @endif
                         @endforeach
                     </tr>
                 @endforeach
