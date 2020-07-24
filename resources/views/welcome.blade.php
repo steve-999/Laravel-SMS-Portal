@@ -37,7 +37,7 @@
                         <textarea id="message-body" name="message" class="form-control" rows="3" value="{{ old('message') }}" 
                             placeholder="Enter message"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success">Send</button>
+                    <button id="send-button" type="submit" class="btn btn-success" disabled>Send</button>
                     <span id="num-chars">140</span>
                 </form>
             </div>

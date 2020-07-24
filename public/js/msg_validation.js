@@ -2,9 +2,22 @@
 
 $(document).ready(function(){
 
-    $('#phone-number').on('keyup keydown change', function(e) {
-        let value = e.target.value;
-        //value = value.replace(/ /, '');
+    $('#phone-number').on('keyup change', () => validateMessage()); 
+    $('#message-body').on('keyup change', () => validateMessage()); 
+
+
+    function validateMessage() {
+        const mobileNumberIsValid = validateMobileNumber();
+        const messageBodyIsValid = validateMessageBody();
+        const validationResult = mobileNumberIsValid && messageBodyIsValid;
+        if (validationResult)
+            $('#send-button').attr("disabled", false);
+        else 
+            $('#send-button').attr("disabled", true);
+    }
+
+    function validateMobileNumber() {
+        const value = $('#phone-number').val();
         const pattern = /^(\+447|07)\d{3}\s?\d{6}$/;
         const result = pattern.test(value);
         if (result === true) {
@@ -17,24 +30,34 @@ $(document).ready(function(){
             $('#phone-number-error-message').html('Please enter a valid UK mobile phone number');
             $('#phone-number-error-message').css('color', 'red');
         }
-    });
+        return result;
+    }
 
-    $('#message-body').on('keyup keydown', function(e) {
-        const msg_body_length = e.target.value.length;
-        if (msg_body_length > 0 && msg_body_length <= 140) {
-            $('#message-body').css('background-color', '#ccffcc');
-        }
-        else {
+    function validateMessageBody() {
+        const msg_body = $('#message-body').val();
+        const msg_body_length = msg_body.length;
+        console.log(msg_body);
+        let result;
+        if (msg_body_length === 0) {
+            result = false;
             $('#message-body').css('background-color', '#ffcccc');
+            $('#num-chars').html('140');
+            $('#num-chars').css('color', 'black');             
         }
-        if (140 - msg_body_length >= 0) {
+        else if (msg_body_length > 0 && msg_body_length <= 140) {
+            result = true;
+            $('#message-body').css('background-color', '#ccffcc');  
             $('#num-chars').html(140 - msg_body_length);
-            $('#num-chars').css('color', 'black');
+            $('#num-chars').css('color', 'black');                 
         }
         else {
+            result = false;
+            $('#message-body').css('background-color', '#ffcccc');
             $('#num-chars').html((msg_body_length - 140) + ' too many characters');
             $('#num-chars').css('color', 'red');
         }
-    });
+        return result;
+    }
 
 });
+
