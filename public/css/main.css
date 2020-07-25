@@ -114,6 +114,11 @@ a:hover {
     text-decoration: none;
 }
 
+#send-button:disabled {
+    border: 1px solid #999999;
+    background-color: darkgrey;
+}
+
 
 th, td {
     padding: 5px;

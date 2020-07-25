@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
@@ -52,9 +51,4 @@ class HomeController extends Controller
         return redirect('/home');
     }
 
-    public function test()
-    {
-        $storage = Redis::Connection();
-
-    }
 }

@@ -1,6 +1,9 @@
 'use strict';
 
-$(document).ready(function(){
+var Nseconds_delay = 5;
+
+//$(document).ready(function(){
+document.addEventListener('DOMContentLoaded', function() {
 
     $('#phone-number').on('keyup change', () => validateMessage()); 
     $('#message-body').on('keyup change', () => validateMessage()); 
@@ -10,7 +13,9 @@ $(document).ready(function(){
         const mobileNumberIsValid = validateMobileNumber();
         const messageBodyIsValid = validateMessageBody();
         const validationResult = mobileNumberIsValid && messageBodyIsValid;
-        if (validationResult)
+        //console.log('mobileNumberIsValid', mobileNumberIsValid);
+        //console.log('messageBodyIsValid', messageBodyIsValid);
+        if (validationResult && !window.isCountingDown)
             $('#send-button').attr("disabled", false);
         else 
             $('#send-button').attr("disabled", true);
@@ -36,7 +41,7 @@ $(document).ready(function(){
     function validateMessageBody() {
         const msg_body = $('#message-body').val();
         const msg_body_length = msg_body.length;
-        console.log(msg_body);
+        //console.log(msg_body);
         let result;
         if (msg_body_length === 0) {
             result = false;
@@ -58,6 +63,48 @@ $(document).ready(function(){
         }
         return result;
     }
+
+    $('#message-form').submit(() => {
+
+        window.isCountingDown = true;
+        $('#send-button').attr("disabled", true);      
+        //console.log('submit button pressed');
+        function displayCountdown() {
+            $('#send-button').html(Nseconds_delay);
+            console.log(Nseconds_delay);
+            Nseconds_delay -= 1;
+            if (Nseconds_delay < 0) {       
+                $('#send-button').html('Send');
+                $('#message-body').val('');
+                $('#num-chars').html(140);                           
+                window.isCountingDown = false;
+                validateMessage();
+                clearInterval(countdownTimer);
+            }              
+        }
+        const countdownTimer = setInterval(displayCountdown, 1000);  
+    })
+
+    // $('#contactForm').on('submit',function(event){
+    //     event.preventDefault();
+    //     const phone_number = $('#phone-number').val();
+    //     const message_body = $('#message-body').val();
+
+    //     error_log('in contactForm JQuery fn');
+
+    //     $.ajax({
+    //         url: "/send",
+    //         type:"POST",
+    //         data:{
+    //             "_token": "{{ csrf_token() }}",
+    //             phone_number: phone_number,
+    //             message_body: message_body,
+    //         },
+    //         success:function(response){
+    //             console.log(response);
+    //         },
+    //     });
+    // });
 
 });
 
