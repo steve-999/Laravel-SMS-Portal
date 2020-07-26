@@ -21,12 +21,12 @@ $twilio_msg_id = $_POST['MessageSid'];
 $msg_id_pattern = '/^[0-9A-Za-z]+$/';
 $status_pattern = '/^[A-Za-z]+$/';
 
-$str .= 'regex 1 = ' . preg_match($msg_id_pattern, $twilio_msg_id) . "\n";
-$str .= 'regex 2 = ' . preg_match($status_pattern, $status) . "\n";
+$str .= 'twilio_msg_id regex = ' . preg_match($msg_id_pattern, $twilio_msg_id) . "\n";
+$str .= 'status regex = ' . preg_match($status_pattern, $status) . "\n";
 
 if (preg_match($msg_id_pattern, $twilio_msg_id) && preg_match($status_pattern, $status)) {
 
-    $link = mysqli_connect('localhost', 'steve', 'filter1234', 'sms_portal');
+    $link = mysqli_connect('localhost', 'steve2', 'QVxvjkrptIlhe74c', 'sms_portal');
     if($link === false) {
         $str .= die('ERROR: Could not connect. ' . mysqli_connect_error());
     }
@@ -40,15 +40,15 @@ if (preg_match($msg_id_pattern, $twilio_msg_id) && preg_match($status_pattern, $
     $str .= $sql;
 
     if(mysqli_query($link, $sql)) {
-        $str .= 'Records were updated successfully.';
+        $str .= "Records were updated successfully.\n";
     } else {
-        $str .= "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+        $str .= "SQL error: $sql. " . mysqli_error($link) . "\n";
     }
 
     mysqli_close($link);
 }
 else {
-    $str .= 'regex failed';
+    $str .= "regex failed\n";
 }
 
 echo $str;
