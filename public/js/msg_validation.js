@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function checkUserLoggedIn() {
-        console.log('length = ', $("#logout-form").length);
-        if($("#logout-form").length == 1) {
+        console.log('user-logged-in = ', $("#user-logged-in").val());
+        if($("#user-logged-in").val() == 'true') {
             $('#not-logged-in-message').text('');
             return true;
         }

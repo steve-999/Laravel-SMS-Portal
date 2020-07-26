@@ -2,9 +2,9 @@
 
 @section('content')
     <h2>Dashboard</h2>
-    <form method="POST" action="/home">
+    <form id="dashboard-form" method="POST" action="/home">
         @csrf
-        <table>
+        <table id="dashboard-table">
             @foreach($keys as $key)
                 <tr>
                     <td>{{ $key }}</td>
@@ -13,6 +13,6 @@
             @endforeach
         </table> 
         <input type="hidden" name="user_id" value="{{ $user_id }}">
-        <button type="submit" class="btn btn-success">Update</button>
+        <button id="dashboard-update-button" type="submit" class="btn btn-success">Update</button>
     </form>
 @endsection

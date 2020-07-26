@@ -163,3 +163,15 @@ th, td {
 #not-logged-in-message {
     color: red;
 }
+
+#dashboard-form {
+    margin-top: 20px;
+}
+
+#dashboard-table td {
+    padding: 20px;
+}
+
+#dashboard-update-button {
+    margin-top: 20px;
+}
