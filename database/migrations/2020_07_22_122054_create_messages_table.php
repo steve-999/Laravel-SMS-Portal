@@ -18,8 +18,9 @@ class CreateMessagesTable extends Migration
             $table->bigInteger('user_id');
             $table->string('src_number');
             $table->string('dst_number');
-            $table->string('body');
+            $table->string('body'); 
             $table->string('status')->nullable();
+            $table->string('twilio_msg_id')->nullable();
             $table->timestamps();
         });
     }
