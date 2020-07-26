@@ -1,0 +1,2 @@
+msg_id: 2
+ConnectedUPDATE messages SET status='delivered', twilio_msg_id='A1234cdefgh' WHERE msg_id = 2Records were updated successfully.

@@ -1,0 +1,12 @@
+msg_id: 19
+SmsSid: SM2cdc87c3fbf9471bb282178d2bfa5642
+SmsStatus: delivered
+MessageStatus: delivered
+To: +447771899430
+MessageSid: SM2cdc87c3fbf9471bb282178d2bfa5642
+AccountSid: ACaf00fb1ccb411cdfbb208dfc48356396
+From: +447401241245
+ApiVersion: 2010-04-01
+regex 1 = 1
+regex 2 = 1
+ConnectedUPDATE messages SET status='delivered', twilio_msg_id='SM2cdc87c3fbf9471bb282178d2bfa5642' WHERE msg_id = 19Records were updated successfully.
