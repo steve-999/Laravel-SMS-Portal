@@ -159,3 +159,7 @@ th, td {
 #dashboard-card {
     width: 250px;
 }
+
+#not-logged-in-message {
+    color: red;
+}

@@ -12,13 +12,26 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateMessage() {
         const mobileNumberIsValid = validateMobileNumber();
         const messageBodyIsValid = validateMessageBody();
-        const validationResult = mobileNumberIsValid && messageBodyIsValid;
+        const userIsLoggedIn = checkUserLoggedIn();
+        const validationResult = mobileNumberIsValid && messageBodyIsValid && userIsLoggedIn && !window.isCountingDown;
         //console.log('mobileNumberIsValid', mobileNumberIsValid);
         //console.log('messageBodyIsValid', messageBodyIsValid);
-        if (validationResult && !window.isCountingDown)
+        if (validationResult)
             $('#send-button').attr("disabled", false);
         else 
             $('#send-button').attr("disabled", true);
+    }
+
+    function checkUserLoggedIn() {
+        console.log('length = ', $("#logout-form").length);
+        if($("#logout-form").length == 1) {
+            $('#not-logged-in-message').text('');
+            return true;
+        }
+        else {
+            $('#not-logged-in-message').text('You must be logged in to send messages');
+            return false;            
+        }
     }
 
     function validateMobileNumber() {

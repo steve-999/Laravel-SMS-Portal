@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Twilio\Rest\Client;
 use Illuminate\Support\Facades\Redis;
 
+
 class SendMessageController extends Controller
 {
     /**
@@ -17,6 +18,8 @@ class SendMessageController extends Controller
      */
     public function index()
     {
+        $user_logged_in = Auth::check();
+        error_log('user_logged_in ' . ($user_logged_in ? 'true' : 'false'));
         return view('welcome');
     }
 

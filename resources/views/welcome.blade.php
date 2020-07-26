@@ -42,6 +42,7 @@
                     </div>
                     <button id="send-button" type="submit" class="btn btn-success" disabled>Send</button>
                     <span id="num-chars">140</span>
+                    <span id="not-logged-in-message"></span>
                 </form>
             </div>
         </div>
