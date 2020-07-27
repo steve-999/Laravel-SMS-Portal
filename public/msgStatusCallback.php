@@ -47,9 +47,7 @@ if (preg_match($msg_id_pattern, $twilio_msg_id) && preg_match($status_pattern, $
         $str .= "Connected\n";
     }
 
-
     $sql = "UPDATE messages SET status='$status', twilio_msg_id='$twilio_msg_id' WHERE msg_id = $msg_id";
-
     $str .= $sql . "\n";
 
     if(mysqli_query($link, $sql)) {
@@ -64,7 +62,7 @@ else {
     $str .= "regex failed\n";
 }
 
-echo $str;
+//echo $str;
 
 $path = "./temp/$datetime.txt";
 file_put_contents($path, $str);

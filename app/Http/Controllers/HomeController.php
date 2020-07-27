@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         $user_id = Auth::user()->id;
         $user = User::findOrFail($user_id);
-        error_log($user);
+        //error_log($user);
         $keys = ['name', 'email', 'relationship'];
         return view('home', ['user' => $user, 'keys' => $keys, 'user_id' => $user_id]);
     }

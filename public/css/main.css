@@ -1,7 +1,29 @@
 
 body {
     background-color: white;
+    box-sizing: border-box;
 }
+
+h1 {
+    font-size: 30px;
+}
+
+th, td {
+    padding: 5px;
+    background-color: ghostwhite;
+}
+
+a {
+    color: darkblue;
+    text-decoration: none;
+}
+
+a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+/******************* global **************************/
 
 #app {
     width: 100%;
@@ -14,15 +36,12 @@ body {
     align-items: flex-start;
 }
 
-h1 {
-    font-size: 30px;
-}
-
 .container {
+    outline: 4px solid black;
     width: 100%;
     max-width: 2000px;
-    height: 100vh;
-    max-height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     margin: 0px 0px;
     background-color: lightsteelblue;
     display: flex;
@@ -40,9 +59,11 @@ h1 {
     align-items: center;
 }
 
-#messages-container {
-    margin-top: 20px;
+.card-header {
+    background-color: #ffffb3;
 }
+
+/******************* navbar banner ***********************/
 
 #banner {
     position: fixed;
@@ -57,12 +78,6 @@ h1 {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-}
-
-
-.message-form-card {
-    width: 400px;
-    background-color: ghostwhite;
 }
 
 #logo {
@@ -103,26 +118,16 @@ h1 {
     color: gold;
 }
 
+/****************** home page ***************************/
 
-a {
-    color: darkblue;
-    text-decoration: none;
-}
-
-a:hover {
-    color: red;
-    text-decoration: none;
+.message-form-card {
+    width: 500px;
+    background-color: ghostwhite;
 }
 
 #send-button:disabled {
     border: 1px solid #999999;
     background-color: darkgrey;
-}
-
-
-th, td {
-    padding: 5px;
-    background-color: ghostwhite;
 }
 
 #phone-number {
@@ -140,38 +145,79 @@ th, td {
     color: red;
 }
 
-#login-register-links {
-    position: fixed;
-    top: 5px;
-    right: 10px;
-    display: flex;
-    flex-direction: row;
+#not-logged-in-message {
+    color: red;
 }
 
+#send-message-success {
+    visibility: hidden;
+}
+
+/***************** login and register pages ************************/
+
 #login-card {
-    width: 440px;
+    width: 500px;
 }
 
 #register-card {
     width: 500px;
 }
 
-#dashboard-card {
-    width: 250px;
+.form-check-input {
+    position: relative;
+    margin-left: 10px;
 }
 
-#not-logged-in-message {
-    color: red;
+#login-remember-me {
+    margin-left: 10px;
+}
+
+/****************** messages page ***********************/
+
+#messages-container {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+#messages-table th, td {
+    border: 1px solid lightgrey;
+    padding: 3px 8px;
+    font-size: 15px;
+    font-family: Calibri, sans-serif;
+}
+
+#messages-table td {
+    background-color: ghostwhite;
+}
+
+#messages-table th {
+    background-color: #ffffb3;
+}
+
+/**************** dashboard ***************************/
+
+#dashboard-card {
+    width: 500px;
 }
 
 #dashboard-form {
-    margin-top: 20px;
+    margin: 10px;
 }
 
-#dashboard-table td {
-    padding: 20px;
+.dashboard-table-input {
+    padding: 5px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #dashboard-update-button {
-    margin-top: 20px;
+    margin-top: 10px;
 }
+
+.dashboard-field-capitalize {
+    text-transform: capitalize;
+}
+
+
+

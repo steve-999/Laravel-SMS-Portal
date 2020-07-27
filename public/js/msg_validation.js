@@ -1,6 +1,6 @@
 'use strict';
 
-var Nseconds_delay = 5;
+var Nseconds_delay = 15;
 
 //$(document).ready(function(){
 document.addEventListener('DOMContentLoaded', function() {
@@ -8,14 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#phone-number').on('keyup change', () => validateMessage()); 
     $('#message-body').on('keyup change', () => validateMessage()); 
 
-
     function validateMessage() {
         const mobileNumberIsValid = validateMobileNumber();
         const messageBodyIsValid = validateMessageBody();
         const userIsLoggedIn = checkUserLoggedIn();
         const validationResult = mobileNumberIsValid && messageBodyIsValid && userIsLoggedIn && !window.isCountingDown;
-        //console.log('mobileNumberIsValid', mobileNumberIsValid);
-        //console.log('messageBodyIsValid', messageBodyIsValid);
         if (validationResult)
             $('#send-button').attr("disabled", false);
         else 
@@ -52,6 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validateMessageBody() {
+        $('#send-message-success').text('');   
+        $('#send-message-success').css('visibility', 'hidden');        
         const msg_body = $('#message-body').val();
         const msg_body_length = msg_body.length;
         //console.log(msg_body);
@@ -80,13 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#message-form').submit(() => {
 
         window.isCountingDown = true;
-        $('#send-button').attr("disabled", true);      
+        let countdown_val = Nseconds_delay;
+        $('#send-button').attr("disabled", true);  
+        $('#send-message-success').text('Message sent!');   
+        $('#send-message-success').css('visibility', 'visible');
         //console.log('submit button pressed');
         function displayCountdown() {
-            $('#send-button').html(Nseconds_delay);
-            console.log(Nseconds_delay);
-            Nseconds_delay -= 1;
-            if (Nseconds_delay < 0) {       
+            $('#send-button').html(countdown_val);
+            console.log(countdown_val);
+            countdown_val -= 1;
+            if (countdown_val < 0) {       
                 $('#send-button').html('Send');
                 $('#message-body').val('');
                 $('#num-chars').html(140);                           
@@ -97,27 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         const countdownTimer = setInterval(displayCountdown, 1000);  
     })
-
-    // $('#contactForm').on('submit',function(event){
-    //     event.preventDefault();
-    //     const phone_number = $('#phone-number').val();
-    //     const message_body = $('#message-body').val();
-
-    //     error_log('in contactForm JQuery fn');
-
-    //     $.ajax({
-    //         url: "/send",
-    //         type:"POST",
-    //         data:{
-    //             "_token": "{{ csrf_token() }}",
-    //             phone_number: phone_number,
-    //             message_body: message_body,
-    //         },
-    //         success:function(response){
-    //             console.log(response);
-    //         },
-    //     });
-    // });
 
 });
 

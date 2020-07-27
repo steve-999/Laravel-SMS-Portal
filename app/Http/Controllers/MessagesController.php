@@ -19,8 +19,7 @@ class MessagesController extends Controller
             ->leftJoin('users', 'messages.user_id', '=', 'users.id')
             ->orderBy('messages.created_at', 'DESC')
             ->get();
-        $keys = ['msg_id', 'user_id', 'src_number', 'dst_number', 'body', 'name', 'email', 'relationship', 'status', 'twilio_msg_id', 
-                'created_at', 'updated_at'];
+        $keys = ['msg_id', 'user_id', 'src_number', 'dst_number', 'body', 'name', 'email', 'relationship', 'status', 'created_at'];
         return view('messages.index', ['messages' => $messages, 'keys' => $keys]);
     }
 
@@ -34,7 +33,6 @@ class MessagesController extends Controller
             abort(404);     
         $keys = ['msg_id', 'user_id', 'src_number', 'dst_number', 'body', 'name', 'email', 'relationship', 'status', 'twilio_msg_id', 
                 'created_at', 'updated_at'];
-        //error_log(serialize($message));
         return view('messages.show', ['message' => $message, 'keys' => $keys]);
     }
 }

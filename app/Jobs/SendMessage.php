@@ -55,34 +55,27 @@ class SendMessage implements ShouldQueue
             ->orderBy('messages.created_at', 'DESC')
             ->first();
         $msg_id = $message->msg_id;
-        error_log('new msg_id ' . $msg_id);
 
-        $callback_url = 'http://81.108.2.236/sms-portal/public/msgStatusCallback.php?msg_id=' . $msg_id;
-        error_log($dest_number);
-        error_log($callback_url);
-    
+        $ip_address = env('MY_IP_ADDRESS');
+        $callback_url = "http://$ip_address/sms-portal/public/msgStatusCallback.php?msg_id=" . $msg_id;
+        $created_at_ts = Redis::hget($user_id, 'created_at');
+
+        while(Redis::exists($user_id)) {
+            $created_at_ts = Redis::hget($user_id, 'created_at');
+            sleep(1);
+        }
+
         $client = new Client($account_sid, $auth_token);
-        $client->messages->create($dest_number, ['from' => $twilio_number, 'body' => $body,
-            'StatusCallback' => $callback_url]);
-
-        error_log('in sendMessage after create message');
+        $client->messages->create($dest_number, ['from' => $twilio_number, 'body' => $body, 'StatusCallback' => $callback_url]);
 
         $message = DB::table('messages')
             ->orderBy('messages.created_at', 'DESC')
             ->first();
         $msg_id = $message->msg_id;
-        error_log('new msg_id after ' . $msg_id);
 
-        $expire_in_seconds = 60;
-        //$redis = Redis::connection();
+        $expire_in_seconds = 15;
         Redis::hset($user_id, 'created_at', time());
-        //Redis::expire($user_id, $expire_in_seconds);
-        $msg_id_in_redis = Redis::hget($user_id, 'created_at');
-        error_log('$msg_id_in_redis ' . $msg_id_in_redis);
-
-        session()->now('success', 'Message sent!');
-        //return back()->with(['success' => "Message sent!"]);
-        //return response()->with(['success' => "Message sent!"]);
-        //return response()->json(['success'=>'Form has been successfully submitted!']);
+        Redis::expire($user_id, $expire_in_seconds);
+        //$created_at_ts = Redis::hget($user_id, 'created_at');
     }
 }

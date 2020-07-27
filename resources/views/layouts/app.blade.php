@@ -35,7 +35,6 @@
                 
 
                 <!-- Right Side Of Navbar -->
-           <!--     <ul id="login-register-links"> -->
 
                     <!-- Authentication Links -->
                     @guest
